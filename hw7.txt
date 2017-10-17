@@ -1,0 +1,21 @@
+Cody Burchett
+HW 7A
+
+Controls
+WASD to move the camera
+EF to zoom in/out
+
+input a number and hit enter into the value inputs labeled row, column, height, width and select a color. Then hit the make button to create the mesh which will be shown in the window to the right. Or you can click the random mesh button to generate a random mesh until one that you like is created.
+
+Use the WASD or the top/side view buttons to look at the mesh from different angles. You can also click the round buttons solid for a filled mesh, wire for a wireframe mesh, or both for wireframe and filled mesh. 
+
+In the browser directly to the left of the window is every vertice in the mesh. Click on the vertice in the browser to choose that one and a small colored symbol will appear in the window over the chosen vertice. Also three slider widgets will appear when a vertice is selected to allow for changing the vertice's x, y, and z position. The color of the mesh can also be changed without having to reclick the make button by changing the color in the color chooser widget.
+
+In order to subdivide/fractalize the mesh move the slider that appears upon generation of a mesh to the number of runs desired (0 to 5) and then click subdivide or fractalize.
+
+I chose to use value inputs for the row, column, width, and height so that I could easily get a value for each of those which could then be input into my controller class. I made a button for creating the mesh rather than try to make it as the user inputs the values to avoid having to rely on default values that the user would not want and would potentially cause errors depending on the order the user input values. Instead I required the user to have everything input the way they want it before creating the mesh so that those errors will not happen. I chose to have the user select the vertice in the browser largely for ease of implementation. I could get the selected value from the browser and based on the number of columns in the mesh could easily get the chosen vertice and it's position which allowed for easy manipulation and allowed me to easily create a small symbol around the chosen vertice's position to show which vertice was chosen. As for the value sliders when the user has selected a vertice I chose to use those widgets because they have the value the widget is currently at towards the top of the widget which makes it easy for the user to see where they are at and it is easy to change the values with decent precision.
+
+As for the mesh class I chose to use a 2D array rather than pointers because of the ease of implementation, the fact that we did not have to be able to support meshes of shapes other than quads, and that the efficiency of the program does not matter for this class as much as it would in a real job.
+
+Bug/Inefficiency?
+Trying to fractalize a mesh 3+ times at once will often cause the program to crash(sometimes the program is capable of fractalizing up to 5 times in one go) although telling it to fractalize twice and then once completed telling it to fractalize twice again will work. Subdividing a mesh works even up to running it 5 times at once (which is the max I allow in one go). My best guess why this would be happening was when fractalizing it needs to choose a number from a range of numbers to add or subtract from the height. That range gets smaller each time the process is run so when the number gets really tiny (fractalizing 3+ times) it may be the floats did not have enough precision to handle it. Although changing to double did not seem to help much.
